@@ -1,8 +1,11 @@
-FROM openjdk:11
+FROM alpine:3.14
 
-#RUN addgroup -S notes && adduser -S notes -G notes
+RUN  apk update \
+  && apk upgrade \
+  && apk add --update openjdk11 tzdata curl unzip bash \
+  && rm -rf /var/cache/apk/*
 
-RUN addgroup --system notes && adduser --system --ingroup notes notes
+RUN addgroup -S notes && adduser -S notes -G notes
 
 USER notes:notes
 
